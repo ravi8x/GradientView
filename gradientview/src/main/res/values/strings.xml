@@ -1,0 +1,5 @@
+<resources>
+    <string name="gradient_linear">linear</string>
+    <string name="gradient_radial">radial</string>
+    <string name="gradient_sweep">sweep</string>
+</resources>

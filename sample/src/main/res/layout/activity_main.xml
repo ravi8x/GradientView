@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f6f7ff"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <info.androidhive.gradientview.GradientView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        app:color_palette="@array/color_palette_radial"
+        app:corner_radius="40"
+        app:gradient_radius="80dp"
+        app:gradient_type="@string/gradient_sweep">
+
+
+    </info.androidhive.gradientview.GradientView>
+
+
+    <info.androidhive.gradientview.GradientView
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        app:center_color="#fdbc4c"
+        app:corner_radius="10"
+        app:end_color="#FF4081"
+        app:gradient_type="@string/gradient_radial"
+        app:start_color="#f57154">
+
+    </info.androidhive.gradientview.GradientView>
+
+    <info.androidhive.gradientview.GradientView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        app:color_palette="@array/color_palette"
+        app:corner_radius="60"
+        app:gradient_angle="90">
+
+
+    </info.androidhive.gradientview.GradientView>
+
+</LinearLayout>

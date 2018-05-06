@@ -19,27 +19,19 @@ import android.widget.FrameLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class Reference:
+ * https://stackoverflow.com/questions/26074784/how-to-make-a-view-in-android-with-rounded-corners
+ */
+
 public class GradientView extends FrameLayout {
     private Bitmap maskBitmap;
-    private Paint paint, maskPaint;
-    private float cornerRadius;
+    private Paint maskPaint;
     private int viewWidth, viewHeight, gradientAngle;
     private int startColor, centreColor, endColor;
-    private int[] cs;
+    private int[] colorPalette;
     private String gradientType;
-    private float radialGradientRadius;
-
-    // TODO - add these features
-    // gradient direction
-    // linear and radial and SweepGradient
-    // array of colors
-    // start, middle, end colors
-    // start position, end position
-    // Random color - optional
-    // Test Project with CardView, RecyclerView, Random Colors
-
-    // References
-    // https://stackoverflow.com/questions/26074784/how-to-make-a-view-in-android-with-rounded-corners
+    private float radialGradientRadius, cornerRadius;
 
     public GradientView(Context context) {
         super(context);
@@ -60,34 +52,40 @@ public class GradientView extends FrameLayout {
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs, R.styleable.GradientView, 0, 0);
 
+        // receiving integers values
         gradientAngle = a.getInteger(R.styleable.GradientView_gradient_angle, getResources().getInteger(R.integer.default_gradient_angle));
-        gradientType = a.getString(R.styleable.GradientView_gradient_type);
         cornerRadius = a.getInteger(R.styleable.GradientView_corner_radius, getResources().getInteger(R.integer.default_corner_radius));
+
+        // receiving string value
+        // gradient type linear, radial or sweep
+        gradientType = a.getString(R.styleable.GradientView_gradient_type);
+
+        // receiving color values
         startColor = a.getColor(R.styleable.GradientView_start_color, -1);
         centreColor = a.getColor(R.styleable.GradientView_center_color, -1);
         endColor = a.getColor(R.styleable.GradientView_end_color, -1);
+
+
+        // receiving dimen value
         radialGradientRadius = a.getDimensionPixelSize(R.styleable.GradientView_gradient_radius, -1);
 
+        // receiving array value
         int arrayId = a.getResourceId(R.styleable.GradientView_color_palette, 0);
-
         if (arrayId != 0) {
-            cs = getResources().getIntArray(arrayId);
+            colorPalette = getResources().getIntArray(arrayId);
         }
 
         a.recycle();
 
-        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
         maskPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
         maskPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-
         setWillNotDraw(false);
     }
 
     @Override
     protected void onSizeChanged(int xNew, int yNew, int xOld, int yOld) {
         super.onSizeChanged(xNew, yNew, xOld, yOld);
-
+        // view width and height
         viewWidth = xNew;
         viewHeight = yNew;
     }
@@ -99,47 +97,19 @@ public class GradientView extends FrameLayout {
 
         Paint paint = new Paint();
 
-
+        // gradient direction angle
         double angleInRadians = Math.toRadians(gradientAngle);
 
+        // generating end X, Y coordinates considering angle
         float endX = (float) (Math.cos(angleInRadians) * viewWidth);
         float endY = (float) (Math.sin(angleInRadians) * viewHeight);
 
-        if (cs == null) {
-            List<Integer> colors = new ArrayList<>();
-            if (startColor != -1) {
-                colors.add(startColor);
-            }
+        prepareColorPalette();
 
-            if (centreColor != -1) {
-                colors.add(centreColor);
-            }
-
-            if (endColor != -1) {
-                colors.add(endColor);
-            }
-
-            cs = toIntArray(colors);
-        }
-
-        if (cs.length > 1) {
-            Shader mShader;
-
-            if (gradientType != null && gradientType.equals(getResources().getString(R.string.gradient_radial))) {
-                if (radialGradientRadius == -1) {
-                    radialGradientRadius = viewWidth / 2;
-                }
-
-                mShader = new RadialGradient(viewWidth / 2, viewHeight / 2, radialGradientRadius, cs, null, Shader.TileMode.CLAMP);
-            } else if (gradientType != null && gradientType.equals(getResources().getString(R.string.gradient_sweep))) {
-                mShader = new SweepGradient(viewWidth / 2, viewHeight / 2, cs, null);
-            } else {
-                mShader = new LinearGradient(0, 0, endX, endY,
-                        cs,
-                        null, Shader.TileMode.CLAMP);
-            }
-
-            paint.setShader(mShader);
+        // Gradient needs at least two colors
+        if (colorPalette.length > 1) {
+            Shader shader = getShader(endX, endY);
+            paint.setShader(shader);
         }
 
         offscreenCanvas.drawPaint(paint);
@@ -155,6 +125,58 @@ public class GradientView extends FrameLayout {
         canvas.drawBitmap(offscreenBitmap, 0f, 0f, paint);
     }
 
+    /**
+     * returns gradient type
+     * linear, radial or sweep
+     * TODO - room for improvement (start, end XY coordinates)
+     */
+    private Shader getShader(float endX, float endY) {
+        // checking for gradient type
+        if (gradientType != null && gradientType.equals(getResources().getString(R.string.gradient_radial))) {
+            if (radialGradientRadius == -1) {
+                // keeping default gradient radius to half of the view width
+                radialGradientRadius = viewWidth / 2;
+            }
+
+            // radial gradient
+            return new RadialGradient(viewWidth / 2, viewHeight / 2, radialGradientRadius, colorPalette, null, Shader.TileMode.CLAMP);
+
+        } else if (gradientType != null && gradientType.equals(getResources().getString(R.string.gradient_sweep))) {
+
+            // sweep gradient
+            return new SweepGradient(viewWidth / 2, viewHeight / 2, colorPalette, null);
+
+        } else {
+
+            // defaults to linear gradient
+            return new LinearGradient(0, 0, endX, endY,
+                    colorPalette,
+                    null, Shader.TileMode.CLAMP);
+        }
+    }
+
+    /**
+     * Checks for start, center and end colors
+     * set from xml layout
+     */
+    private void prepareColorPalette() {
+        if (colorPalette == null) {
+            List<Integer> colors = new ArrayList<>();
+            if (startColor != -1) {
+                colors.add(startColor);
+            }
+
+            if (centreColor != -1) {
+                colors.add(centreColor);
+            }
+
+            if (endColor != -1) {
+                colors.add(endColor);
+            }
+            colorPalette = toIntArray(colors);
+        }
+    }
+
     int[] toIntArray(List<Integer> list) {
         int[] ret = new int[list.size()];
         for (int i = 0; i < ret.length; i++)
@@ -162,17 +184,20 @@ public class GradientView extends FrameLayout {
         return ret;
     }
 
+    /**
+     * Creating masked bitmap with rounded corners
+     */
     private Bitmap createMask(int width, int height) {
         Bitmap mask = Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8);
         Canvas canvas = new Canvas(mask);
 
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.WHITE);
+        Paint eraser = new Paint(Paint.ANTI_ALIAS_FLAG);
+        eraser.setColor(Color.WHITE);
 
-        canvas.drawRect(0, 0, width, height, paint);
+        canvas.drawRect(0, 0, width, height, eraser);
 
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-        canvas.drawRoundRect(new RectF(0, 0, width, height), cornerRadius, cornerRadius, paint);
+        eraser.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        canvas.drawRoundRect(new RectF(0, 0, width, height), cornerRadius, cornerRadius, eraser);
 
         return mask;
     }

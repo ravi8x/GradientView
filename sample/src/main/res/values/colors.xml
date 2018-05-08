@@ -2,20 +2,48 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FFFFFF</color>
 
-    <color name="colorStart">#f57154</color>
-    <color name="colorCenter">#fdbc4c</color>
-    <color name="colorEnd">#FF4081</color>
+    <color name="toolbar_start_color">#815ef8</color>
+    <color name="toolbar_end_color">#ac5ffc</color>
 
-    <integer-array name="color_palette">
-        <item>@color/colorStart</item>
-        <item>@color/colorCenter</item>
-        <item>@color/colorEnd</item>
+    <color name="drawer_start_color">#fe9376</color>
+    <color name="drawer_end_color">#eb6f65</color>
+
+    <color name="toolbar_color_palette1_start_color">#0659c4</color>
+    <color name="toolbar_color_palette1_end_color">#22a7f6</color>
+
+    <color name="toolbar_color_palette2_start_color">#ce4c4c</color>
+    <color name="toolbar_color_palette2_end_color">#f85e5e</color>
+
+    <color name="toolbar_color_palette3_start_color">#c74be7</color>
+    <color name="toolbar_color_palette3_center_color">#1bb4ef</color>
+    <color name="toolbar_color_palette3_end_color">#47de8e</color>
+
+    <integer-array name="toolbar_color_palette_default">
+        <item>@color/toolbar_start_color</item>
+        <item>@color/toolbar_end_color</item>
     </integer-array>
 
-    <integer-array name="color_palette_radial">
-        <item>@color/colorCenter</item>
-        <item>@color/colorAccent</item>
+    <integer-array name="toolbar_color_palette1">
+        <item>@color/toolbar_color_palette1_start_color</item>
+        <item>@color/toolbar_color_palette1_end_color</item>
+    </integer-array>
+
+    <integer-array name="toolbar_color_palette2">
+        <item>@color/toolbar_color_palette2_start_color</item>
+        <item>@color/toolbar_color_palette2_end_color</item>
+    </integer-array>
+
+    <integer-array name="toolbar_color_palette3">
+        <item>@color/toolbar_color_palette3_start_color</item>
+        <item>@color/toolbar_color_palette3_center_color</item>
+        <item>@color/toolbar_color_palette3_end_color</item>
+    </integer-array>
+
+
+    <integer-array name="drawer_color_palette">
+        <item>@color/toolbar_color_palette2_start_color</item>
+        <item>@color/toolbar_color_palette2_end_color</item>
     </integer-array>
 </resources>

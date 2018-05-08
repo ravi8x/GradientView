@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">sample</string>
+    <string name="title_activity_main">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_toolbar_variant1">Toolbar Gradient 1</string>
+    <string name="action_toolbar_variant2">Toolbar Gradient 2</string>
+    <string name="action_toolbar_variant3">Toolbar Gradient 3</string>
+    <string name="action_toolbar_reset">Reset Toolbar</string>
+    <string name="action_search">Search</string>
 </resources>

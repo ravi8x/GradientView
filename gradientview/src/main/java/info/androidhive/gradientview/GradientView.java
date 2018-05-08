@@ -201,4 +201,53 @@ public class GradientView extends FrameLayout {
 
         return mask;
     }
+
+    public void setStartColor(int color) {
+        if (color == -1) {
+            startColor = -1;
+            colorPalette = null;
+            invalidate();
+            return;
+        }
+        startColor = color;
+        if (colorPalette != null && colorPalette.length > 0)
+            colorPalette[0] = startColor;
+
+        invalidate();
+    }
+
+    public void setCentreColor(int color) {
+        if (color == -1) {
+            centreColor = -1;
+            colorPalette = null;
+            invalidate();
+            return;
+        }
+
+        centreColor = color;
+        if (colorPalette != null && colorPalette.length > 1)
+            colorPalette[1] = centreColor;
+
+        invalidate();
+    }
+
+    public void setEndColor(int color) {
+        if (color == -1) {
+            endColor = -1;
+            colorPalette = null;
+            invalidate();
+            return;
+        }
+        endColor = color;
+        if (colorPalette != null && colorPalette.length > 2)
+            colorPalette[2] = endColor;
+
+        invalidate();
+    }
+
+    public void setColorPalette(int[] colorPalette) {
+        this.colorPalette = colorPalette;
+
+        invalidate();
+    }
 }

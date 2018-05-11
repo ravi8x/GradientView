@@ -13,8 +13,10 @@ import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ import java.util.List;
  * https://stackoverflow.com/questions/26074784/how-to-make-a-view-in-android-with-rounded-corners
  */
 
-public class GradientView extends FrameLayout {
+public class GradientView extends LinearLayout {
     private Bitmap maskBitmap;
     private Paint maskPaint;
     private int viewWidth, viewHeight, gradientAngle;
@@ -47,6 +49,7 @@ public class GradientView extends FrameLayout {
         super(context, attrs, defStyle);
         init(context, attrs, defStyle);
     }
+
 
     private void init(Context context, AttributeSet attrs, int defStyle) {
         TypedArray a = context.getTheme().obtainStyledAttributes(
@@ -202,6 +205,7 @@ public class GradientView extends FrameLayout {
         return mask;
     }
 
+    // TODO - room for improvements
     public void setStartColor(int color) {
         if (color == -1) {
             startColor = -1;
@@ -245,6 +249,9 @@ public class GradientView extends FrameLayout {
         invalidate();
     }
 
+    /**
+     * renders the gradient with new color palette
+     */
     public void setColorPalette(int[] colorPalette) {
         this.colorPalette = colorPalette;
 

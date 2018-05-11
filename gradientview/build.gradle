@@ -1,11 +1,9 @@
 apply plugin: 'com.android.library'
-
-apply plugin: 'com.android.library'
 apply plugin: 'com.jfrog.artifactory'
 apply plugin: 'maven-publish'
 
 def packageName = 'info.androidhive'
-def libraryVersion = '1.1.5'
+def libraryVersion = '1.0.0'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'

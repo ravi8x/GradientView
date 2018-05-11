@@ -7,8 +7,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0'
-        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:3.1.1"
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.7.2"
         
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -20,6 +20,10 @@ allprojects {
     repositories {
         google()
         jcenter()
+
+        maven {
+            url "http://localhost:8081/artifactory/androidhive-maven"
+        }
     }
 }
 

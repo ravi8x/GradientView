@@ -3,8 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
 
-
-
     defaultConfig {
         applicationId "info.androidhive.sample"
         minSdkVersion 16
@@ -42,4 +40,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 
     implementation project(':gradientview')
+
+    // loads the library from local repository
+    // implementation(group: 'info.androidhive', name: 'gradientview', version: '1.0.0', ext: 'aar')
 }

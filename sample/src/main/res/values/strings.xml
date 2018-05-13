@@ -12,4 +12,7 @@
     <string name="action_toolbar_variant3">Toolbar Gradient 3</string>
     <string name="action_toolbar_reset">Reset Toolbar</string>
     <string name="action_search">Search</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

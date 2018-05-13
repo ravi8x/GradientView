@@ -7,8 +7,8 @@
     <color name="toolbar_start_color">#815ef8</color>
     <color name="toolbar_end_color">#ac5ffc</color>
 
-    <color name="drawer_start_color">#fe9376</color>
-    <color name="drawer_end_color">#eb6f65</color>
+    <color name="drawer_start_color">#36a7cf</color>
+    <color name="drawer_end_color">#062345</color>
 
     <color name="toolbar_color_palette1_start_color">#0659c4</color>
     <color name="toolbar_color_palette1_end_color">#22a7f6</color>
@@ -43,7 +43,7 @@
 
 
     <integer-array name="drawer_color_palette">
-        <item>@color/toolbar_color_palette2_start_color</item>
-        <item>@color/toolbar_color_palette2_end_color</item>
+        <item>@color/drawer_start_color</item>
+        <item>@color/drawer_end_color</item>
     </integer-array>
 </resources>

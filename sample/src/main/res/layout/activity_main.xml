@@ -18,6 +18,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        app:gradient_angle="45"
         app:color_palette="@array/drawer_color_palette"
         app:corner_radius="0">
 

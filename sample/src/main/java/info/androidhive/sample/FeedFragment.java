@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+
 public class FeedFragment extends Fragment {
 
     public FeedFragment() {
@@ -28,6 +30,17 @@ public class FeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_feed, container, false);
+        View view = inflater.inflate(R.layout.fragment_feed, container, false);
+        ButterKnife.bind(this, view);
+
+        if (savedInstanceState == null) {
+            TopSliderFragment fragment = new TopSliderFragment();
+
+            getFragmentManager().beginTransaction()
+                    .add(R.id.frame_container, fragment)
+                    .commit();
+        }
+
+        return view;
     }
 }

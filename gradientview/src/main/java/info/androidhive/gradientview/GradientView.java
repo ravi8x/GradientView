@@ -15,6 +15,10 @@ import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -34,6 +38,8 @@ public class GradientView extends LinearLayout {
     private int[] colorPalette;
     private String gradientType;
     private float radialGradientRadius, cornerRadius;
+    private boolean firstTimeDraw = true;
+    private int calcHeight = 0;
 
     public GradientView(Context context) {
         super(context);
@@ -95,7 +101,17 @@ public class GradientView extends LinearLayout {
 
     @Override
     public void draw(Canvas canvas) {
-        Bitmap offscreenBitmap = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
+        if (firstTimeDraw) {
+            //Iterating on the remaining children of relative layout to calculate the height
+            for (int i = 1; i < ((ViewGroup) getParent()).getChildCount(); i++) {
+                calcHeight += ((ViewGroup) getParent()).getChildAt(i).getHeight();
+            }
+            setMinimumHeight(calcHeight);
+            firstTimeDraw = false;
+        }
+        Bitmap offscreenBitmap = Bitmap.createBitmap(canvas.getWidth() > 0 ? canvas.getWidth() : 1,
+                calcHeight,
+                Bitmap.Config.ARGB_8888);
         Canvas offscreenCanvas = new Canvas(offscreenBitmap);
 
         Paint paint = new Paint();
@@ -120,7 +136,7 @@ public class GradientView extends LinearLayout {
         super.draw(offscreenCanvas);
 
         if (maskBitmap == null) {
-            maskBitmap = createMask(canvas.getWidth(), canvas.getHeight());
+            maskBitmap = createMask(canvas.getWidth(), calcHeight);
         }
 
         offscreenCanvas.drawBitmap(maskBitmap, 0f, 0f, maskPaint);

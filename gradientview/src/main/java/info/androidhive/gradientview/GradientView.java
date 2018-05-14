@@ -31,7 +31,6 @@ import java.util.List;
  */
 
 public class GradientView extends LinearLayout {
-    private static final String TAG = GradientView.class.getSimpleName();
     private Bitmap maskBitmap;
     private Paint maskPaint;
     private int viewWidth, viewHeight, gradientAngle;
@@ -103,7 +102,6 @@ public class GradientView extends LinearLayout {
     @Override
     public void draw(Canvas canvas) {
         if (firstTimeDraw) {
-            Log.e(TAG, "firstTimeDraw: " + firstTimeDraw);
             //Iterating on the remaining children of relative layout to calculate the height
             for (int i = 1; i < ((ViewGroup) getParent()).getChildCount(); i++) {
                 calcHeight += ((ViewGroup) getParent()).getChildAt(i).getHeight();
@@ -111,12 +109,6 @@ public class GradientView extends LinearLayout {
             setMinimumHeight(calcHeight);
             firstTimeDraw = false;
         }
-
-        if(calcHeight == 0)
-            calcHeight = viewHeight;
-
-        Log.e(TAG, "calHeight: " + calcHeight + ", canvas width:" + canvas.getWidth());
-
         Bitmap offscreenBitmap = Bitmap.createBitmap(canvas.getWidth() > 0 ? canvas.getWidth() : 1,
                 calcHeight,
                 Bitmap.Config.ARGB_8888);

@@ -8,14 +8,14 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 
-public class FeedFragment extends Fragment {
+public class WhatsNewFragment extends Fragment {
 
-    public FeedFragment() {
+    public WhatsNewFragment() {
         // Required empty public constructor
     }
 
-    public static FeedFragment newInstance() {
-        FeedFragment fragment = new FeedFragment();
+    public static WhatsNewFragment newInstance() {
+        WhatsNewFragment fragment = new WhatsNewFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -30,16 +30,14 @@ public class FeedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_feed, container, false);
+        View view = inflater.inflate(R.layout.fragment_whats_new, container, false);
         ButterKnife.bind(this, view);
 
-        if (savedInstanceState == null) {
-            TopSliderFragment fragment = new TopSliderFragment();
+        TopSliderFragment fragment = new TopSliderFragment();
 
-            getFragmentManager().beginTransaction()
-                    .add(R.id.frame_container, fragment)
-                    .commit();
-        }
+        getFragmentManager().beginTransaction()
+                .add(R.id.frame_container, fragment)
+                .commit();
 
         return view;
     }

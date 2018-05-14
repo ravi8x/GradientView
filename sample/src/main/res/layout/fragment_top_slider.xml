@@ -10,4 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <LinearLayout
+        android:id="@+id/layoutDots"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dots_height"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:gravity="center"
+        android:orientation="horizontal" />
+
 </FrameLayout>

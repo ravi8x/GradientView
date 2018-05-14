@@ -5,7 +5,6 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -161,9 +160,9 @@ public class MainActivity extends AppCompatActivity
 
     private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(FeedFragment.newInstance(), "WHAT'S NEW");
-        adapter.addFragment(PopularFragment.newInstance(), "POPULAR");
-        adapter.addFragment(OrdersFragment.newInstance(), "ORDERS");
+        adapter.addFragment(new WhatsNewFragment(), "WHAT'S NEW");
+        adapter.addFragment(new PopularFragment(), "POPULAR");
+        adapter.addFragment(new OrdersFragment(), "ORDERS");
         viewPager.setAdapter(adapter);
     }
 

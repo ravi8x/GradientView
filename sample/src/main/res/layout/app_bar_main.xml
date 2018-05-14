@@ -20,7 +20,7 @@
             <info.androidhive.gradientview.GradientView
                 android:id="@+id/toolbar_gradient"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 app:color_palette="@array/toolbar_color_palette_default"
                 app:corner_radius="0" />
@@ -33,6 +33,8 @@
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tablayout"
+                app:tabIndicatorColor="@android:color/white"
+                app:tabIndicatorHeight="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/toolbar" />

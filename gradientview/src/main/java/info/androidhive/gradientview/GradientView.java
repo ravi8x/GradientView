@@ -109,6 +109,8 @@ public class GradientView extends LinearLayout {
             setMinimumHeight(calcHeight);
             firstTimeDraw = false;
         }
+        //To make sure calcHeight is greater than 0
+        calcHeight = calcHeight > 0 ? calcHeight : 1;
         Bitmap offscreenBitmap = Bitmap.createBitmap(canvas.getWidth() > 0 ? canvas.getWidth() : 1,
                 calcHeight,
                 Bitmap.Config.ARGB_8888);

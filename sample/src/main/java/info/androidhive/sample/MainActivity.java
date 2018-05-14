@@ -162,8 +162,8 @@ public class MainActivity extends AppCompatActivity
     private void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(FeedFragment.newInstance(), "WHAT'S NEW");
-        adapter.addFragment(FeedFragment.newInstance(), "POPULAR");
-        adapter.addFragment(FeedFragment.newInstance(), "ORDERS");
+        adapter.addFragment(PopularFragment.newInstance(), "POPULAR");
+        adapter.addFragment(OrdersFragment.newInstance(), "ORDERS");
         viewPager.setAdapter(adapter);
     }
 

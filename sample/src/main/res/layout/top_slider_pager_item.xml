@@ -7,6 +7,13 @@
     <info.androidhive.gradientview.GradientView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:color_palette="@array/drawer_color_palette" />
+        app:color_palette="@array/drawer_color_palette"
+        app:corner_radius="0" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="hello" />
 
 </RelativeLayout>
